@@ -1,0 +1,21 @@
+/* =========================================================
+   ADMIN AUTH PAGES (login / forgot / reset / minimal dashboard)
+========================================================= */
+.admin-auth-page {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  padding-block: var(--sp-8);
+}
+.admin-auth-wrap {
+  display: flex;
+  justify-content: center;
+}
+.admin-auth-card,
+.admin-home-card {
+  width: 100%;
+  max-width: 440px;
+}
+.admin-home-card {
+  max-width: 560px;
+}
