@@ -10,7 +10,9 @@ import ContactMessage from "../models/ContactMessage.js";
 import DemoRequest from "../models/DemoRequest.js";
 import { validate } from "../middleware/validate.js";
 import { requireAdmin } from "../middleware/auth.js";
-import { sendEmail } from "../utils/sendEmail.js";
+// Email notifications are disabled for now — re-enable by uncommenting this
+// import and the sendEmail(...) call below once Resend is set up.
+// import { sendEmail } from "../utils/sendEmail.js";
 
 const router = Router();
 
@@ -83,19 +85,14 @@ router.post(
         const siteUrl = (process.env.CLIENT_ORIGINS || "").split(",")[0] || "http://localhost:5173";
         const resetUrl = `${siteUrl}/admin/reset-password?token=${rawToken}`;
 
-        const sent = await sendEmail({
-          subject: "Reset your QuantEdge admin password",
-          html: `<p>Someone requested a password reset for the QuantEdge admin panel.</p><p><a href="${resetUrl}">Click here to set a new password</a> — this link expires in 30 minutes.</p><p>If you didn't request this, you can ignore this email.</p>`,
-        }).catch((err) => {
-          console.error("Failed to send password reset email:", err);
-          return { skipped: true };
-        });
+        // sendEmail({
+        //   subject: "Reset your QuantEdge admin password",
+        //   html: `<p>Someone requested a password reset for the QuantEdge admin panel.</p><p><a href="${resetUrl}">Click here to set a new password</a> — this link expires in 30 minutes.</p><p>If you didn't request this, you can ignore this email.</p>`,
+        // }).catch((err) => console.error("Failed to send password reset email:", err));
 
-        // Resend isn't configured yet in this environment — print the link
-        // so the reset flow is still testable end-to-end during development.
-        if (sent?.skipped) {
-          console.log(`[password reset link — email not configured] ${resetUrl}`);
-        }
+        // Email sending is disabled for now — print the link so the reset
+        // flow is still usable/testable until it's wired back up.
+        console.log(`[password reset link — email disabled] ${resetUrl}`);
       }
 
       res.json({ message: "If that email is registered, a reset link has been sent." });

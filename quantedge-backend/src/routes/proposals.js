@@ -5,7 +5,9 @@ import rateLimit from "express-rate-limit";
 import ProposalRequest from "../models/ProposalRequest.js";
 import { validate } from "../middleware/validate.js";
 import { requireAdmin } from "../middleware/auth.js";
-import { sendEmail, renderNotificationHtml } from "../utils/sendEmail.js";
+// Email notifications are disabled for now — re-enable by uncommenting this
+// import and the sendEmail(...) call below once Resend is set up.
+// import { sendEmail, renderNotificationHtml } from "../utils/sendEmail.js";
 
 const router = Router();
 
@@ -68,24 +70,24 @@ router.post(
         message,
       });
 
-      sendEmail({
-        subject: `New Proposal Request — ${institution}`,
-        html: renderNotificationHtml("New Proposal Request", {
-          Name: name,
-          Designation: designation,
-          Institution: institution,
-          "Institution Type": institutionType,
-          Email: email,
-          Phone: phone,
-          "Number of Students": students,
-          "Program / Course": program,
-          "Training Requirement": (trainingRequirement || []).join(", "),
-          "Preferred Mode": mode,
-          "Preferred Duration": duration,
-          Message: message,
-        }),
-        replyTo: email,
-      }).catch((err) => console.error("Failed to send proposal notification email:", err));
+      // sendEmail({
+      //   subject: `New Proposal Request — ${institution}`,
+      //   html: renderNotificationHtml("New Proposal Request", {
+      //     Name: name,
+      //     Designation: designation,
+      //     Institution: institution,
+      //     "Institution Type": institutionType,
+      //     Email: email,
+      //     Phone: phone,
+      //     "Number of Students": students,
+      //     "Program / Course": program,
+      //     "Training Requirement": (trainingRequirement || []).join(", "),
+      //     "Preferred Mode": mode,
+      //     "Preferred Duration": duration,
+      //     Message: message,
+      //   }),
+      //   replyTo: email,
+      // }).catch((err) => console.error("Failed to send proposal notification email:", err));
 
       res.status(201).json({ id: doc._id, message: "Proposal request received." });
     } catch (err) {

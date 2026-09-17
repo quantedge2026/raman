@@ -5,7 +5,9 @@ import rateLimit from "express-rate-limit";
 import DemoRequest from "../models/DemoRequest.js";
 import { validate } from "../middleware/validate.js";
 import { requireAdmin } from "../middleware/auth.js";
-import { sendEmail, renderNotificationHtml } from "../utils/sendEmail.js";
+// Email notifications are disabled for now — re-enable by uncommenting this
+// import and the sendEmail(...) call below once Resend is set up.
+// import { sendEmail, renderNotificationHtml } from "../utils/sendEmail.js";
 
 const router = Router();
 
@@ -54,20 +56,20 @@ router.post(
         message,
       });
 
-      sendEmail({
-        subject: `New Demo Request — ${name}`,
-        html: renderNotificationHtml("New Demo Session Request", {
-          Name: name,
-          Email: email,
-          Phone: phone,
-          Institution: institution,
-          "Preferred Date": preferredDate,
-          "Preferred Time Slot": preferredTimeSlot,
-          Attendees: attendees,
-          Message: message,
-        }),
-        replyTo: email,
-      }).catch((err) => console.error("Failed to send demo notification email:", err));
+      // sendEmail({
+      //   subject: `New Demo Request — ${name}`,
+      //   html: renderNotificationHtml("New Demo Session Request", {
+      //     Name: name,
+      //     Email: email,
+      //     Phone: phone,
+      //     Institution: institution,
+      //     "Preferred Date": preferredDate,
+      //     "Preferred Time Slot": preferredTimeSlot,
+      //     Attendees: attendees,
+      //     Message: message,
+      //   }),
+      //   replyTo: email,
+      // }).catch((err) => console.error("Failed to send demo notification email:", err));
 
       res.status(201).json({ id: doc._id, message: "Demo request received." });
     } catch (err) {
