@@ -19,3 +19,215 @@
 .admin-home-card {
   max-width: 560px;
 }
+
+/* =========================================================
+   ADMIN DASHBOARD (leads management)
+========================================================= */
+.admin-dash-page {
+  align-items: flex-start;
+}
+.admin-dash-card {
+  max-width: 1080px;
+}
+.admin-dash-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: var(--sp-7);
+  padding-bottom: var(--sp-4);
+  border-bottom: 1px solid rgba(100, 116, 139, 0.14);
+}
+.admin-dash-tab {
+  font-family: var(--f-body);
+  font-weight: 600;
+  font-size: 0.84rem;
+  padding: 9px 16px;
+  border-radius: var(--r-full);
+  border: none;
+  background: var(--surf);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.admin-dash-tab.active {
+  background: var(--blue);
+  color: #fff;
+}
+
+.leads-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  margin-top: var(--sp-6);
+}
+.leads-status-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.leads-tab {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  padding: 6px 12px;
+  border-radius: var(--r-full);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgba(100, 116, 139, 0.2);
+}
+.leads-tab.active {
+  background: rgba(36, 59, 143, 0.1);
+  color: var(--blue);
+  box-shadow: none;
+  font-weight: 600;
+}
+.leads-total {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.leads-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  padding: var(--sp-6) 0;
+}
+
+.leads-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: var(--sp-4);
+}
+.leads-row {
+  border-radius: var(--r-md);
+  background: var(--card);
+  box-shadow: -6px -6px 14px var(--hi), 7px 7px 16px var(--lo);
+  overflow: hidden;
+}
+.leads-row-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text);
+  font-family: var(--f-body);
+}
+.leads-row-head .leads-col {
+  flex: 1 1 0;
+  min-width: 0;
+  font-size: 0.86rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.leads-row-head .leads-col:first-of-type {
+  font-weight: 700;
+}
+.leads-date {
+  flex: 0 0 auto;
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+.leads-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px 14px;
+}
+.leads-status-select {
+  font-family: var(--f-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--blue);
+  border: none;
+  border-radius: var(--r-full);
+  padding: 6px 12px;
+  background: rgba(36, 59, 143, 0.08);
+  cursor: pointer;
+}
+.leads-delete {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+.leads-delete:hover {
+  background: rgba(101, 21, 109, 0.1);
+  color: var(--purple-deep);
+}
+.leads-detail {
+  padding: var(--sp-5) 16px;
+  border-top: 1px dashed rgba(100, 116, 139, 0.2);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--sp-4);
+}
+.leads-detail-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.leads-detail-label {
+  font-family: var(--f-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+.leads-detail-value {
+  font-size: 0.86rem;
+  color: var(--text);
+  line-height: 1.55;
+  word-break: break-word;
+}
+
+.leads-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  margin-top: var(--sp-6);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 640px) {
+  .leads-row-head {
+    flex-wrap: wrap;
+  }
+  .leads-row-head .leads-col {
+    flex: 1 1 44%;
+    white-space: normal;
+  }
+  .leads-row-head .leads-col::before {
+    content: attr(data-label) ": ";
+    font-family: var(--f-mono);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    display: block;
+  }
+  .leads-date {
+    flex: 1 1 100%;
+  }
+}

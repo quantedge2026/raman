@@ -3,12 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { getAdminMe, getAdminDashboardStats } from "../../utils/api";
 import { getAdminToken, getAdminInfo, clearAdminSession } from "../../utils/adminAuth";
 import { usePageTitle } from "../../hooks/usePageTitle";
+import LeadsTable from "./LeadsTable";
+import { RESOURCE_CONFIG } from "./leadsConfig";
+
+const RESOURCE_KEYS = Object.keys(RESOURCE_CONFIG);
 
 export default function AdminHome() {
   usePageTitle("Admin Dashboard", "QuantEdge admin dashboard.");
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
-  const [error, setError] = useState("");
+  const [resourceKey, setResourceKey] = useState(RESOURCE_KEYS[0]);
   const admin = getAdminInfo();
 
   useEffect(() => {
@@ -33,9 +37,9 @@ export default function AdminHome() {
   }
 
   return (
-    <section className="admin-auth-page">
+    <section className="admin-auth-page admin-dash-page">
       <div className="wrap admin-auth-wrap">
-        <div className="pform-shell raised-lg admin-home-card">
+        <div className="pform-shell raised-lg admin-dash-card">
           <div className="pform-top">
             <div>
               <h3>Welcome{admin?.name ? `, ${admin.name}` : ""}</h3>
@@ -45,8 +49,6 @@ export default function AdminHome() {
               Log Out
             </button>
           </div>
-
-          {error && <p className="pf-error">{error}</p>}
 
           {stats && (
             <div className="saas-stat-row" style={{ marginTop: "var(--sp-6)" }}>
@@ -65,10 +67,20 @@ export default function AdminHome() {
             </div>
           )}
 
-          <p className="pf-note" style={{ marginTop: "var(--sp-6)" }}>
-            A full leads table (view, filter, update status) isn't built yet — this is a
-            starting dashboard. Let us know if you'd like that next.
-          </p>
+          <div className="admin-dash-tabs">
+            {RESOURCE_KEYS.map((key) => (
+              <button
+                key={key}
+                type="button"
+                className={`admin-dash-tab${resourceKey === key ? " active" : ""}`}
+                onClick={() => setResourceKey(key)}
+              >
+                {RESOURCE_CONFIG[key].label}
+              </button>
+            ))}
+          </div>
+
+          <LeadsTable resourceKey={resourceKey} />
         </div>
       </div>
     </section>

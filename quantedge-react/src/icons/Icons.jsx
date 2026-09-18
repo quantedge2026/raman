@@ -229,6 +229,14 @@ export function ChatIcon(props) {
     </svg>
   );
 }
+export function TrashIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M4 7h16M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2m3 0-.7 12.1a2 2 0 0 1-2 1.9H7.7a2 2 0 0 1-2-1.9L5 7h14Z" />
+      <path d="M10 11v6M14 11v6" />
+    </svg>
+  );
+}
 export function CalendarIcon(props) {
   return (
     <svg {...base} {...props}>

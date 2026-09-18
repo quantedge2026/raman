@@ -49,3 +49,26 @@ export function getAdminMe(token) {
 export function getAdminDashboardStats(token) {
   return request("/api/admin/dashboard-stats", { headers: { Authorization: `Bearer ${token}` } });
 }
+
+export function getAdminList(basePath, token, { status, page = 1, limit = 20 } = {}) {
+  const params = new URLSearchParams({ page, limit });
+  if (status) params.set("status", status);
+  return request(`${basePath}?${params.toString()}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
+export function updateAdminItem(basePath, id, updates, token) {
+  return request(`${basePath}/${id}`, {
+    method: "PATCH",
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(updates),
+  });
+}
+
+export function deleteAdminItem(basePath, id, token) {
+  return request(`${basePath}/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
