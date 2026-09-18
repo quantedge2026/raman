@@ -592,9 +592,9 @@ export const testimonials = [
     program: "PGDM",
     institution: "JK Business School",
     placedAt: "Adobe",
-    meta: "PGDM, JK Business School · Placed at Adobe",
+    meta: "PGDM, JK Business School · Placed at Asian Paint",
     quote:
-      "I'm so thankful to QuantEdge Services! Their sessions were clear, motivating, and really targeted what top recruiters look for. With their help, I improved my skills and walked into my interview with confidence. Getting placed at Adobe feels like a dream come true!",
+      "I'm so thankful to QuantEdge Services! Their sessions were clear, motivating, and really targeted what top recruiters look for. With their help, I improved my skills and walked into my interview with confidence. Getting placed at Asian Paint feels like a dream come true!",
   },
 ];
 
